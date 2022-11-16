@@ -78,3 +78,36 @@ class ArtistAPIView(APIView):
             return Artist.objects.get(pk=pk)
         except Artist.DoesNotExist:
             raise Http404
+
+    
+#READ////////////////////////////////////////////////Python > JSON
+    def get(self, request, pk=None, format=None):
+        if pk:
+            data = self.get_object(pk)
+            serializer = ArtistSerializer(data)
+        else:
+            data = Artist.objects.all()
+            serializer = ArtistSerializer(data, many=True)
+
+        return Response(serializer.data)  
+
+#CREATE//////////////////////////////////////////////JSON > Python
+    def post(self, request, format=None):
+        print("You sent a post request")
+
+        data = request.data
+        serializer = ArtistSerializer(data=data)
+
+        #validate data
+        serializer.is_valid(raise_exception=True)
+        #save the Song to the database
+        serializer.save()
+        #tell frontend about save result (success or not)
+        response = Response()
+
+        response.data = {
+            'createsongmsg' : 'Artist created successfully',
+            'data' : serializer.data, 
+        }
+
+        return response
