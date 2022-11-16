@@ -12,7 +12,7 @@ class SongAPIView(APIView):
         except Song.DoesNotExist:
             raise Http404
 
-#READ////////////////////////////////////////////////
+#READ////////////////////////////////////////////////Python > JSON
     def get(self, request, pk=None, format=None):
         if pk:
             data = self.get_object(pk)
@@ -22,3 +22,23 @@ class SongAPIView(APIView):
             serializer = SongSerializer(data, many=True)
 
             return Response(serializer.data)  
+
+#CREATE//////////////////////////////////////////////JSON > Python
+    def post(self, request, format=None):
+        data = request.data
+        serializer = SongSerializer(data=data)
+
+        #validate data
+        serializer.is_valid(raised_exception=True)
+        #save the Song to the database
+        serializer.save()
+        #tell frontend about save result (success or not)
+        response = Response()
+
+        response.data = {
+            'createsongmsg' : 'Song created successfully',
+            'data' : serializer.data, 
+        }
+
+        return response
+        
