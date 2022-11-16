@@ -43,4 +43,22 @@ class SongAPIView(APIView):
         }
 
         return response
-        
+
+#UPDATE/////////////////////////////////////////////
+
+    def put(self, request, pk=None, format=None):
+        song_to_update = Song.objects.get(pk=pk)
+        data = request.data
+        serializer = SongSerializer(instance = song_to_update, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        response = Response()
+
+        response.data = {
+            'updatesongmsg' : 'song updated successfully',
+            'data' : serializer.data
+        }
+
+        return response
+
+

@@ -11,6 +11,8 @@ class Song(models.Model):
     #genre_id = models.ForeignKey('Genre', default=None, on_delete=models.PROTECT)
     #times_played = models.IntegerField(default=0)
 
+    #playlists = models.ManyToManyField(Playlist)
+
     #release_date = models.DateField()????????????????
 
 class Artist(models.Model):
