@@ -18,7 +18,7 @@ class SongAPIView(APIView):
             data = self.get_object(pk)
             serializer = SongSerializer(data)
         else:
-            data = Todo.objects.all()
+            data = Song.objects.all()
             serializer = SongSerializer(data, many=True)
 
             return Response(serializer.data)  
