@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from .models import Song, Artist, Album, Genre, Playlist
 from .serializers import SongSerializer
 from rest_framework.response import Response
+from rest_framework import status
 
 class SongAPIView(APIView):
     def get_object(self, pk):
@@ -60,5 +61,12 @@ class SongAPIView(APIView):
         }
 
         return response
+
+#DELETE/////////////////////////////////////////////
+
+    def delete(self, request, pk, format=None):
+        song_to_delete = self.get_object(pk)
+        song_to_delete.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
