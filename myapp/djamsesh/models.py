@@ -5,8 +5,7 @@ from django.db import models
 class Song(models.Model):
     #id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=100)
-    mainartist = models.ForeignKey('Artist', default=None, on_delete=models.PROTECT)
-    featuredartists = models.ForeignKey('Artist', default=None, on_delete=models.PROTECT)
+    artist = models.ForeignKey('Artist', default=None, on_delete=models.PROTECT)
     #album_id = models.ForeignKey('Album', default=None, on_delete=models.PROTECT)
     explicit = models.BooleanField(default=False)
     #genre_id = models.ForeignKey('Genre', default=None, on_delete=models.PROTECT)

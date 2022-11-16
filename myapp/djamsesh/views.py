@@ -69,4 +69,12 @@ class SongAPIView(APIView):
         song_to_delete.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+#END SONG//////////////////////////////////////////////////////////////////
+#START ARTIST//////////////////////////////////////////////////////////////
 
+class ArtistAPIView(APIView):
+    def get_object(self, pk):
+        try:
+            return Artist.objects.get(pk=pk)
+        except Artist.DoesNotExist:
+            raise Http404
