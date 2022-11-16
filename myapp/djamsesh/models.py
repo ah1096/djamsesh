@@ -1,4 +1,5 @@
 from django.db import models
+#from datetime import date
 
 
 class Song(models.Model):
@@ -6,28 +7,28 @@ class Song(models.Model):
     title = models.CharField(max_length=100)
     explicit = models.BooleanField(default=False)
     times_played = models.IntegerField(default=0)
-    #artist_id = 
-    #genre_id =
-    #album_id = 
-    #release_date = models.DateTimeField(default=timezone.now)
+    artist_id = models.ForeignKey('Artist', default=None, on_delete=models.PROTECT)
+    genre_id = models.ForeignKey('Genre', default=None, on_delete=models.PROTECT)
+    album_id = models.ForeignKey('Album', default=None, on_delete=models.PROTECT)
+    #release_date = models.DateField()()
 
 class Artist(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100)
     bio = models.CharField(max_length=200)
     imageURL = models.CharField(max_length=250)
-    #genre_id =
-    #release_date = models.DateTimeField(default=timezone.now)
+    genre_id = models.ForeignKey('Genre', default=None, on_delete=models.PROTECT)
+    #release_date = models.DateField()
     
 
 class Album(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=100)
     coverURL = models.CharField(max_length=250)
-    #artist_id = 
-    #genre_id = 
-    #song_id = 
-    #release_date = models.DateTimeField(default=timezone.now)
+    artist_id = models.ForeignKey('Artist', default=None, on_delete=models.PROTECT)
+    genre_id = models.ForeignKey('Genre', default=None, on_delete=models.PROTECT)
+    song_id = models.ForeignKey('Song', default=None, on_delete=models.PROTECT)
+    #release_date = models.DateField()
 
 class Genre(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -36,7 +37,7 @@ class Genre(models.Model):
 class Playlist(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=100)
-    #song_id = 
+    song_id = models.ForeignKey('Song', default=None, on_delete=models.PROTECT)
 
 
 
