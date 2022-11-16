@@ -3,5 +3,5 @@ from .views import SongAPIView
 
 urlpatterns = [
     path('song/', SongAPIView.as_view()),
-    path('song/<str:pk/', SongAPIView.as_view())
+    path('song/<str:pk>/', SongAPIView.as_view())
 ]

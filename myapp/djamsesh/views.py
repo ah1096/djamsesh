@@ -21,15 +21,17 @@ class SongAPIView(APIView):
             data = Song.objects.all()
             serializer = SongSerializer(data, many=True)
 
-            return Response(serializer.data)  
+        return Response(serializer.data)  
 
 #CREATE//////////////////////////////////////////////JSON > Python
     def post(self, request, format=None):
+        print("You sent a post request")
+
         data = request.data
         serializer = SongSerializer(data=data)
 
         #validate data
-        serializer.is_valid(raised_exception=True)
+        serializer.is_valid(raise_exception=True)
         #save the Song to the database
         serializer.save()
         #tell frontend about save result (success or not)
