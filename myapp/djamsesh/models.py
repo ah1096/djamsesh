@@ -14,11 +14,11 @@ class Song(models.Model):
     #playlists = models.ManyToManyField(Playlist)??????????
     #release_date = models.DateField()????????????????
 
-# class Artist(models.Model):
-#     name = models.CharField(max_length=100)
-#     bio = models.CharField(max_length=200)
-#     imageURL = models.CharField(max_length=250)
-#     #genre = models.ForeignKey('Genre', default=None)
+class Artist(models.Model):
+    name = models.CharField(max_length=100)
+    bio = models.CharField(max_length=200)
+    imageURL = models.CharField(max_length=250)
+    #genre = models.ForeignKey('Genre', default=None)
     
     
 
