@@ -111,3 +111,27 @@ class ArtistAPIView(APIView):
         }
 
         return response
+
+#UPDATE/////////////////////////////////////////////
+
+    def put(self, request, pk=None, format=None):
+        artist_to_update = Artist.objects.get(pk=pk)
+        data = request.data
+        serializer = ArtistSerializer(instance = artist_to_update, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        response = Response()
+
+        response.data = {
+            'updateartistmsg' : 'artist updated successfully',
+            'data' : serializer.data
+        }
+
+        return response
+
+#DELETE/////////////////////////////////////////////
+
+    def delete(self, request, pk, format=None):
+        artist_to_delete = self.get_object(pk)
+        artist_to_delete.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
