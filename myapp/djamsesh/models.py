@@ -20,7 +20,11 @@ class Artist(models.Model):
     imageURL = models.CharField(max_length=250)
     #genre = models.ForeignKey('Genre', default=None)
     
-    
+
+class Genre(models.Model):
+    #id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=200)  
 
 # class Album(models.Model):
 #     coverURL = models.CharField(max_length=250)
@@ -31,9 +35,6 @@ class Artist(models.Model):
 
 #     #release_date = models.DateField()????????
 
-# class Genre(models.Model):
-#     #id = models.IntegerField(primary_key=True)
-#     name = models.CharField(max_length=100)
     
 
 # class Playlist(models.Model):
