@@ -9,9 +9,9 @@ class Artist(models.Model):
     bio = models.CharField(max_length=200)
     imageURL = models.CharField(max_length=250) 
 
-# class Album(models.Model):
-#     coverURL = models.CharField(max_length=250)
-#     title = models.CharField(max_length=100)
+class Album(models.Model):
+    coverURL = models.CharField(max_length=250)
+    title = models.CharField(max_length=100)
 
 class Genre(models.Model):
     name = models.CharField(max_length=100)
