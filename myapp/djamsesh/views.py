@@ -6,6 +6,60 @@ from .serializers import SongSerializer, ArtistSerializer, GenreSerializer, Albu
 from rest_framework.response import Response
 from rest_framework import status
 
+
+
+
+
+
+
+class Album_SongList(generics.ListCreateAPIView):
+    queryset = Album_Song.objects.all()
+    serializer_class = Album_SongSerializer
+
+class Album_SongDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Album_Song.objects.all()
+    serializer_class = Album_SongSerializer
+
+class Artist_SongList(generics.ListCreateAPIView):
+    queryset = Artist_Song.objects.all()
+    serializer_class = Artist_SongSerializer
+
+class Artist_SongDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Artist_Song.objects.all()
+    serializer_class = Artist_SongSerializer
+
+
+class GenreList(generics.ListCreateAPIView):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+
+class GenreDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+
+
+class PlaylistList(generics.ListCreateAPIView):
+    queryset = Playlist.objects.all()
+    serializer_class = PlaylistSerializer
+
+class PlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Playlist.objects.all()
+    serializer_class = PlaylistSerializer
+
+class AlbumList(generics.ListCreateAPIView):
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
+
+class AlbumDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
+
+
+
+
+#aezsdrftghj/////////////////////////////////////////////////////////////////////////
+#ertyhjk/////////////////////////////////////////////////////////////////////////////
+
 class SongAPIView(APIView):
     def get_object(self, pk):
         try:
@@ -319,4 +373,8 @@ class PlaylistAPIView(APIView):
         album_to_delete = self.get_object(pk)
         album_to_delete.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+#rdcfgvhbjn///////////////////////////////////////////
+#rdcfgvhbjn///////////////////////////////////////////
+
 

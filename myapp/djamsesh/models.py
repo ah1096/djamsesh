@@ -20,6 +20,20 @@ class Genre(models.Model):
 class Playlist(models.Model):
     title = models.CharField(max_length=100)
 
+#combos////////////////////////
+
+class Album_Song(models.Model):
+    song = models.ForeignKey(Song, default=None, on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, default=None, on_delete=models.CASCADE)
+
+class Artist_Song(models.Model):
+    song = models.ForeignKey(Song, default=None, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, default=None, on_delete=models.CASCADE)
+
+class Playlist_Song(models.Model):
+    song = models.ForeignKey(Song, default=None, on_delete=models.CASCADE)
+    playlist = models.ForeignKey(Playlist, default=None, on_delete=models.CASCADE)
+
 
 
 

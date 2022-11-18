@@ -12,4 +12,9 @@ urlpatterns = [
     path('album/<str:pk>/', AlbumAPIView.as_view()),
     path('playlist/', PlaylistAPIView.as_view()),
     path('playlist/<str:pk>/', PlaylistAPIView.as_view()),
+
+    path('artistsonglist/', ArtistSongList.as_view()),
+    path('artistsonglist/<str:pk>', ArtistSongDetail.as_view()),
+    path('albumsong/', AlbumSongList.as_view()),
+    path('albumsong/<str:pk>', AlbumSongDetail.as_view())
 ]
