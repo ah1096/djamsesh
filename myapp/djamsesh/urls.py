@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SongAPIView, ArtistAPIView, GenreAPIView, AlbumAPIView
+from .views import SongAPIView, ArtistAPIView, GenreAPIView, AlbumAPIView, PlaylistAPIView
 
 urlpatterns = [
     path('song/', SongAPIView.as_view()),
@@ -10,4 +10,6 @@ urlpatterns = [
     path('genre/<str:pk>/', GenreAPIView.as_view()),
     path('album/', AlbumAPIView.as_view()),
     path('album/<str:pk>/', AlbumAPIView.as_view()),
+    path('playlist/', PlaylistAPIView.as_view()),
+    path('playlist/<str:pk>/', PlaylistAPIView.as_view()),
 ]

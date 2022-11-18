@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http.response import Http404
 from rest_framework.views import APIView
-from .models import Song, Artist, Genre, Album
-from .serializers import SongSerializer, ArtistSerializer, GenreSerializer, AlbumSerializer
+from .models import Song, Artist, Genre, Album, Playlist
+from .serializers import SongSerializer, ArtistSerializer, GenreSerializer, AlbumSerializer, PlaylistSerializer
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -246,6 +246,70 @@ class AlbumAPIView(APIView):
 
         response.data = {
             'updatealbummsg' : 'album updated successfully',
+            'data' : serializer.data
+        }
+        return response
+
+#DELETE/////////////////////////////////////////////
+    def delete(self, request, pk, format=None):
+        album_to_delete = self.get_object(pk)
+        album_to_delete.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#qqqq/////////////////////////////////////////////
+#PLAYLIST/////////////////////////////////////////////
+
+class PlaylistAPIView(APIView):
+    def get_object(self, pk):
+        try:
+            return Playlist.objects.get(pk=pk)
+        except Playlist.DoesNotExist:
+            raise Http404
+
+#READ////////////////////////////////////////////////Python > JSON
+    def get(self, request, pk=None, format=None):
+        if pk:
+            data = self.get_object(pk)
+            serializer = PlaylistSerializer(data)
+        else:
+            data = Playlist.objects.all()
+            serializer = PlaylistSerializer(data, many=True)
+
+        return Response(serializer.data)  
+
+#CREATE//////////////////////////////////////////////JSON > Python
+    def post(self, request, format=None):
+        print("You sent a post request")
+
+        data = request.data
+        serializer = PlaylistSerializer(data=data)
+
+        #validate data
+        serializer.is_valid(raise_exception=True)
+        #save the Song to the database
+        serializer.save()
+        #tell frontend about save result (success or not)
+        response = Response()
+
+        response.data = {
+            'createplaylistmsg' : 'Playlist created successfully',
+            'data' : serializer.data, 
+        }
+
+        return response
+
+#UPDATE/////////////////////////////////////////////
+    def put(self, request, pk=None, format=None):
+        playlist_to_update = Playlist.objects.get(pk=pk)
+        data = request.data
+        serializer = PlaylistSerializer(instance = playlist_to_update, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        response = Response()
+
+        response.data = {
+            'updateplaylistmsg' : 'playlist updated successfully',
             'data' : serializer.data
         }
         return response
